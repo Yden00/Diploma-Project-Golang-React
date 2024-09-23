@@ -12,6 +12,7 @@ func FilesHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	db := GetDB()
 	rows, err := db.Query("SELECT id, filename FROM files")
 	if err != nil {
 		log.Printf("Error retrieving files from database: %v", err)

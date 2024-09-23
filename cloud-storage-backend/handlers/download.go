@@ -18,6 +18,7 @@ func DownloadHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	db := GetDB()
 	var filename string
 	var fileData []byte
 	err := db.QueryRow("SELECT filename, data FROM files WHERE id = $1", id).Scan(&filename, &fileData)
@@ -27,7 +28,7 @@ func DownloadHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.Header().Set("Content-Disposition", fmt.Sprintf("attachment; filename=%s", filename))
+	w.Header().Set("Content-Disposition", fmt.Sprintf("attachment; filename=\"%s\"", filename))
 	w.Header().Set("Content-Type", "application/octet-stream")
 
 	_, err = w.Write(fileData)

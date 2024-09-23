@@ -1,18 +1,11 @@
 package handlers
 
 import (
-	"database/sql"
 	"fmt"
 	"io"
 	"log"
 	"net/http"
 )
-
-var db *sql.DB
-
-func SetDB(database *sql.DB) {
-	db = database
-}
 
 func UploadHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {

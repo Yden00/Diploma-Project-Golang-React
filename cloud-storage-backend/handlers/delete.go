@@ -17,6 +17,7 @@ func DeleteHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	db := GetDB()
 	_, err := db.Exec("DELETE FROM files WHERE id = $1", id)
 	if err != nil {
 		log.Printf("Error deleting file from database: %v", err)
